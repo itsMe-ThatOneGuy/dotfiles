@@ -93,7 +93,11 @@ return {
 			end)
 
 			vim.keymap.set("n", "<leader>ns", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config"), initial_mode = "normal" })
+				builtin.find_files({
+					cwd = vim.fn.stdpath("config"),
+					follow = true,
+					initial_mode = "normal",
+				})
 			end)
 
 			vim.keymap.set("n", "<leader>/", function()
