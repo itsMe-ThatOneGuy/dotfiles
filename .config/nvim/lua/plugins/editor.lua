@@ -45,6 +45,7 @@ return {
 						grouped = true,
 						hijack_netrw = true,
 						initial_mode = "normal",
+						follow_symlinks = true,
 						mappings = {
 							["i"] = {
 								["<C-w>"] = function()
@@ -122,6 +123,7 @@ return {
 					hidden = true,
 					grouped = true,
 					previewer = false,
+					follow_symlinks = true,
 					initial_mode = "normal",
 					layout_config = { height = 40 },
 				})
