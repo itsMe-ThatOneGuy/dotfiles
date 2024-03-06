@@ -6,6 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
+			"sharkdp/fd",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
