@@ -37,7 +37,7 @@ return {
 						})
 					end
 
-                    --require("illuminate").on_attach(client)
+					--require("illuminate").on_attach(client)
 				end,
 			})
 
@@ -95,11 +95,10 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua",
-                "tsserver",
-                "html",
-                "tailwindcss",
-                "cssls",
-
+				"tsserver",
+				"html",
+				"tailwindcss",
+				"cssls",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
