@@ -62,24 +62,33 @@ return {
 						},
 					},
 				},
-                tsserver = {},
-                html = {},
-                tailwindcss = {},
-                cssls = {}
+				tsserver = {},
+				html = {},
+				tailwindcss = {
+					root_dir = function(fname)
+						local root_pattern = require("lspconfig").util.root_pattern(
+							"tailwind.config.cjs",
+							"tailwind.config.js",
+							"postcss.config.js"
+						)
+						return root_pattern(fname)
+					end,
+				},
+				cssls = {},
 			}
 
-            local mason_settings = {
-                ui = {
-                    border = "none",
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
-                },
-                log_level = vim.log.levels.INFO,
-                max_concurrent_installers = 4,
-            }
+			local mason_settings = {
+				ui = {
+					border = "none",
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+				log_level = vim.log.levels.INFO,
+				max_concurrent_installers = 4,
+			}
 
 			require("mason").setup(mason_settings)
 
