@@ -77,6 +77,7 @@ return {
 				cssls = {},
 				phpactor = {},
 				pyright = {},
+				gopls = {},
 			}
 
 			local mason_settings = {
@@ -103,6 +104,7 @@ return {
 				"cssls",
 				"phpactor",
 				"pyright",
+				"gopls",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
