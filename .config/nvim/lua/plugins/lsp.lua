@@ -75,6 +75,7 @@ return {
 					end,
 				},
 				cssls = {},
+				phpactor = {},
 			}
 
 			local mason_settings = {
@@ -99,6 +100,7 @@ return {
 				"html",
 				"tailwindcss",
 				"cssls",
+				"phpactor",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
