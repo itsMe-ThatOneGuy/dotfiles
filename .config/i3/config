@@ -217,8 +217,7 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
-#exec --no-startup-id feh --randomize --bg-scale ~/Pictures/
-exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id wal -i ~/Pictures/Wallpapers/cool/anglescape_soulbody_edit.jpg
+exec --no-startup-id sh $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id wal -i ~/Pictures/Wallpapers/Windows/win95_4.jpg
 exec_always --no-startup-id picom -f
 exec_always autotiling
