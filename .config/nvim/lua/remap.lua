@@ -13,6 +13,10 @@ keymap("n", "<F12>", toggle_spell_check, opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+keymap("n", "xx", "<cmd>source %<CR>")
+keymap("n", "xc", ":.lua<CR>")
+keymap("v", "xc", ":.lua<CR>")
+
 keymap("n", "gl", vim.diagnostic.open_float, { desc = "Show Diagnostic message float" })
 keymap("n", "<leader>lj", vim.diagnostic.goto_next, { desc = "Next Diagnostic message" })
 keymap("n", "<leader>lk", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic message" })
