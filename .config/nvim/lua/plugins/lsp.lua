@@ -17,11 +17,9 @@ return {
 
 					map("gD", vim.lsp.buf.declaration, "goto Declaration")
 					map("gd", vim.lsp.buf.definition, "goto definition")
-					map("K", vim.lsp.buf.hover, "Hover Doc")
 					map("gI", vim.lsp.buf.implementation, "goto implementation")
 					map("gr", vim.lsp.buf.references, "goto reference")
 					map("<leader>la", vim.lsp.buf.code_action, "code action")
-					map("gd", vim.lsp.buf.definition, "goto definition")
 					map("K", vim.lsp.buf.hover, "Hover Doc")
 					map("<leader>rn", vim.lsp.buf.rename, "rename")
 
@@ -41,8 +39,12 @@ return {
 				end,
 			})
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			local capabilities = nil
+			if pcall(require, "cmp_nvim_lsp") then
+				capabilities = require("cmp_nvim_lsp").default_capabilities()
+			end
+
+			local lspconfig = require("lspconfig")
 
 			local servers = {
 				lua_ls = {
@@ -78,7 +80,19 @@ return {
 				phpactor = {},
 				pyright = {},
 				gopls = {},
+				sqls = {},
+				yamlls = {},
+				dockerls = {},
 			}
+
+			local servers_to_install = vim.tbl_filter(function(key)
+				local t = servers[key]
+				if type(t) == "table" then
+					return not t.manual_install
+				else
+					return t
+				end
+			end, vim.tbl_keys(servers))
 
 			local mason_settings = {
 				ui = {
@@ -92,11 +106,9 @@ return {
 				log_level = vim.log.levels.INFO,
 				max_concurrent_installers = 4,
 			}
-
 			require("mason").setup(mason_settings)
 
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
+			local ensure_installed = {
 				"stylua",
 				"ts_ls",
 				"html",
@@ -105,18 +117,22 @@ return {
 				"phpactor",
 				"pyright",
 				"gopls",
-			})
+				"sqls",
+			}
+
+			vim.list_extend(ensure_installed, servers_to_install)
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-			require("mason-lspconfig").setup({
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
-			})
+			for name, config in pairs(servers) do
+				if config == true then
+					config = {}
+				end
+				config = vim.tbl_deep_extend("force", {}, {
+					capabilities = capabilities,
+				}, config)
+
+				lspconfig[name].setup(config)
+			end
 		end,
 	},
 }
