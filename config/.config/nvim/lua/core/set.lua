@@ -1,4 +1,3 @@
-print("Hello, from set")
 local diagnostic_config = {
 	signs = {
 		text = {

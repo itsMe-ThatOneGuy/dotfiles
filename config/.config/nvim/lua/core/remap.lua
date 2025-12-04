@@ -1,4 +1,3 @@
-print("Hello, from remap")
 -- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
