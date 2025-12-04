@@ -217,6 +217,9 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
 
+bindsym $mod+x exec --no-startup-id screen_locker.sh
+
+exec --no-startup-id sh -c 'sleep 1; env DISPLAY=:0 XAUTHORITY=/home/matthew/.Xauthority xss-lock -n --not-require-login -- /usr/local/bin/screen_locker.sh &'
 exec --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id wal -i ~/Pictures/Wallpapers/city.jpg
 exec_always --no-startup-id picom
