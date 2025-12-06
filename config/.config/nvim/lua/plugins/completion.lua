@@ -1,29 +1,26 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+		event = "InsertEnter",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			{
 				"L3MON4D3/LuaSnip",
-				dependencies = {
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-				},
+				-- follow latest release.
+				version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+				-- install jsregexp (optional!).
+				build = "make install_jsregexp",
+				dependencies = { "rafamadriz/friendly-snippets" },
 			},
-            "saadparwaiz1/cmp_luasnip",
+			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
+
 			local luasnip = require("luasnip")
-			luasnip.config.setup({})
+			require("luasnip.loaders.from_vscode").lazy_load()
 
 			local lspkind = require("lspkind")
 
@@ -33,7 +30,6 @@ return {
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				completion = { completeopt = "menu,menuone,noinsert" },
 
 				mapping = cmp.mapping.preset.insert({
 					["<C-n>"] = cmp.mapping.select_next_item(),
