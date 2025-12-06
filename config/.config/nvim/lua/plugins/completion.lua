@@ -18,39 +18,14 @@ return {
 				},
 			},
             "saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
 
-			local kind_icons = {
-				Text = "󰊄",
-				Method = "",
-				Function = "󰡱",
-				Constructor = "",
-				Field = "",
-				Variable = "󰫧",
-				Class = "",
-				Interface = "",
-				Module = "󰕳",
-				Property = "",
-				Unit = "",
-				Value = "",
-				Enum = "",
-				Keyword = "",
-				Snippet = "󰅩",
-				Color = "",
-				File = "",
-				Reference = "",
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "",
-				Struct = "",
-				Event = "",
-				Operator = "",
-				TypeParameter = "",
-			}
+			local lspkind = require("lspkind")
 
 			cmp.setup({
 				snippet = {
@@ -84,22 +59,6 @@ return {
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
-				},
-
-				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						vim_item.kind = kind_icons[vim_item.kind]
-						vim_item.menu = ({
-							nvim_lsp = "",
-							nvim_lua = "",
-							luasnip = "",
-							buffer = "",
-							path = "",
-							emoji = "",
-						})[entry.source.name]
-						return vim_item
-					end,
 				},
 
 				confirm_opts = {
