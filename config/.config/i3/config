@@ -219,8 +219,8 @@ client.background       $bg
 
 bindsym $mod+x exec --no-startup-id screen_locker.sh
 
-exec --no-startup-id sh -c 'sleep 1; env DISPLAY=:0 XAUTHORITY=/home/matthew/.Xauthority xss-lock -n --not-require-login -- /usr/local/bin/screen_locker.sh &'
 exec --no-startup-id sh $HOME/.config/polybar/launch.sh
+exec --no-startup-id sh -c 'sleep 1; env DISPLAY=:0 XAUTHORITY=/home/matthew/.Xauthority xss-lock -n --not-require-login -- /usr/local/bin/screen_locker.sh &'
 exec_always --no-startup-id wal -i "$(find ~/Pictures/Wallpapers/current_wallpaper/ -type f | head -n 1)" 
 exec_always --no-startup-id picom
 exec_always autotiling
