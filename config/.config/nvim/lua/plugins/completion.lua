@@ -22,7 +22,7 @@ return {
 			local luasnip = require("luasnip")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
-			local lspkind = require("lspkind")
+			require("lspkind")
 
 			cmp.setup({
 				snippet = {
@@ -34,7 +34,10 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-n>"] = cmp.mapping.select_next_item(),
 					["<C-p>"] = cmp.mapping.select_prev_item(),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<C-y>"] = cmp.mapping.confirm({
+						select = true,
+						behavior = cmp.ConfirmBehavior.Replace,
+					}),
 
 					["<C-Space>"] = cmp.mapping.complete({}),
 
