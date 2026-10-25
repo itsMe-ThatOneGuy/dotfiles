@@ -1,11 +1,10 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	branch = "0.1.x",
+	version = "*",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
-		"sharkdp/fd",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
@@ -116,7 +115,7 @@ return {
 
 		vim.keymap.set("n", "<leader>pf", function()
 			telescope.extensions.file_browser.file_browser({
-				path = "%:p:h",
+				path = telescope_buffer_dir(),
 				cwd = telescope_buffer_dir(),
 				respect_gitignore = false,
 				hidden = true,
