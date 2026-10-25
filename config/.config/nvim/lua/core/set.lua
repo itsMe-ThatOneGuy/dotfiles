@@ -31,13 +31,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.diagnostic.config(diagnostic_config)
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = "rounded",
-})
+local orig_signature_help = vim.lsp.buf.signature_help
+vim.lsp.buf.signature_help = function(config)
+	config = config or {}
+	config.border = "rounded"
+	return orig_signature_help(config)
+end
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-	border = "rounded",
-})
+local orig_hover = vim.lsp.buf.hover
+vim.lsp.buf.hover = function(config)
+	config = config or {}
+	config.border = "rounded"
+	return orig_hover(config)
+end
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
